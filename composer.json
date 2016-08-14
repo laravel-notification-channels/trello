@@ -1,6 +1,6 @@
 {
     "name": "laravel-notification-channels/trello",
-    "description": ":package_description",
+    "description": "Trello Notifications driver",
     "homepage": "https://github.com/laravel-notification-channels/trello",
     "license": "MIT",
     "authors": [
