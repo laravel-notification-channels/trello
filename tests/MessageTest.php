@@ -14,6 +14,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
+
         $this->message = new TrelloMessage();
     }
 
@@ -37,6 +38,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function it_can_set_the_name()
     {
         $this->message->name('CardName');
+
         $this->assertEquals('CardName', Arr::get($this->message->toArray(), 'name'));
     }
 
@@ -44,6 +46,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function it_can_set_the_description()
     {
         $this->message->description('MyDescription');
+
         $this->assertEquals('MyDescription', Arr::get($this->message->toArray(), 'desc'));
     }
 
@@ -52,6 +55,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $date = new DateTime('tomorrow');
         $this->message->due('tomorrow');
+
         $this->assertEquals($date->format(DateTime::ATOM), Arr::get($this->message->toArray(), 'due'));
     }
 
@@ -60,6 +64,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $date = new DateTime('tomorrow');
         $this->message->due($date);
+
         $this->assertEquals($date->format(DateTime::ATOM), Arr::get($this->message->toArray(), 'due'));
     }
 
@@ -67,6 +72,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function it_can_set_the_top_position()
     {
         $this->message->top();
+
         $this->assertEquals('top', Arr::get($this->message->toArray(), 'pos'));
     }
 
@@ -74,6 +80,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function it_can_set_the_bottom_position()
     {
         $this->message->bottom();
+
         $this->assertEquals('bottom', Arr::get($this->message->toArray(), 'pos'));
     }
 
@@ -81,6 +88,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function it_can_set_a_numeric_position()
     {
         $this->message->position(5);
+
         $this->assertEquals(5, Arr::get($this->message->toArray(), 'pos'));
     }
 }
