@@ -36,7 +36,7 @@ class TrelloChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (!$routing = collect($notifiable->routeNotificationFor('Trello'))) {
+        if (! $routing = collect($notifiable->routeNotificationFor('Trello'))) {
             return;
         }
 
@@ -48,14 +48,14 @@ class TrelloChannel
 
         $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true) !== false;
 
-        if (!$shouldSendMessage) {
+        if (! $shouldSendMessage) {
             return;
         }
 
         $trelloParameters = $notification->toTrello($notifiable)->toArray();
 
-        $response = $this->client->post(self::API_ENDPOINT . '?key='. $key .'&token='. $routing->get('token'), [
-            'form_params' => Arr::set($trelloParameters, 'idList', $routing->get('idList'))
+        $response = $this->client->post(self::API_ENDPOINT.'?key='.$key.'&token='.$routing->get('token'), [
+            'form_params' => Arr::set($trelloParameters, 'idList', $routing->get('idList')),
         ]);
 
         if ($response->getStatusCode() !== 200) {

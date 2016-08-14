@@ -30,8 +30,8 @@ class ChannelTest extends TestCase
                         'desc' => 'TrelloDescription',
                         'pos' => 'top',
                         'due' => null,
-                        'idList' => 'TrelloListId'
-                    ]
+                        'idList' => 'TrelloListId',
+                    ],
                 ])
             ->andReturn($response);
         $channel = new TrelloChannel($client);
@@ -86,10 +86,9 @@ class TestNotification extends Notification
 {
     public function toTrello($notifiable)
     {
-        return (
+        return
             (new TrelloMessage('TrelloName'))
                 ->description('TrelloDescription')
-                ->top()
-        );
+                ->top();
     }
 }

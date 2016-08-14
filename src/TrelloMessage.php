@@ -18,7 +18,6 @@ class TrelloMessage
     /** @var string|null */
     protected $due;
 
-
     /**
      * @param string $name
      *
