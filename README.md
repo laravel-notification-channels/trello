@@ -1,12 +1,14 @@
-Use this repo as a skeleton for your new channel, once you're done please submit a Pull Request on [this repo](https://github.com/laravel-notification-channels/new-channels) with all the files.
+# Trello notifications channel for Laravel 5.3 [WIP]
 
-Here's the latest documentation on Laravel 5.3 Notifications System: 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/trello.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/trello)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/laravel-notification-channels/trello/master.svg?style=flat-square)](https://travis-ci.org/laravel-notification-channels/trello)
+[![StyleCI](https://styleci.io/repos/65379321/shield)](https://styleci.io/repos/65379321)
+[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/9015691f-130d-4fca-8710-72a010abc684.svg?style=flat-square)](https://insight.sensiolabs.com/projects/9015691f-130d-4fca-8710-72a010abc684)
+[![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/trello.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/trello)
+[![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/trello.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/trello)
 
-https://laravel.com/docs/master/notifications
-
-# A Boilerplate repo for contributions
-
-This package makes it easy to send notifications using [Trello](link to service) with Laravel 5.3.
+This package makes it easy to create [Trello cards](https://developers.trello.com/) with Laravel 5.3.
 
 ## Contents
 
