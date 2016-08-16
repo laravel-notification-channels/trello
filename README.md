@@ -6,6 +6,7 @@
 [![StyleCI](https://styleci.io/repos/65379321/shield)](https://styleci.io/repos/65379321)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/9015691f-130d-4fca-8710-72a010abc684.svg?style=flat-square)](https://insight.sensiolabs.com/projects/9015691f-130d-4fca-8710-72a010abc684)
 [![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/trello.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/trello)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/trello/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/trello/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/trello.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/trello)
 
 This package makes it easy to create [Trello cards](https://developers.trello.com/) with Laravel 5.3.
