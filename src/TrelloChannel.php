@@ -5,8 +5,6 @@ namespace NotificationChannels\Trello;
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
-use NotificationChannels\Trello\Events\MessageWasSent;
-use NotificationChannels\Trello\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
 
@@ -44,12 +42,6 @@ class TrelloChannel
             throw InvalidConfiguration::configurationNotSet();
         }
 
-        $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true) !== false;
-
-        if (! $shouldSendMessage) {
-            return;
-        }
-
         $trelloParameters = $notification->toTrello($notifiable)->toArray();
 
         $response = $this->client->post(self::API_ENDPOINT.'?key='.$key.'&token='.$routing->get('token'), [
@@ -59,7 +51,5 @@ class TrelloChannel
         if ($response->getStatusCode() !== 200) {
             throw CouldNotSendNotification::serviceRespondedWithAnError($response);
         }
-
-        event(new MessageWasSent($notifiable, $notification));
     }
 }
