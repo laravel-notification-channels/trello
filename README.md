@@ -39,10 +39,11 @@ Add your Trello REST API Key to your `config/services.php`:
 
 ```php
 // config/services.php
-
-    'trello' => [
-        'key' => env('TRELLO_API_KEY'),
-    ]
+...
+'trello' => [
+    'key' => env('TRELLO_API_KEY'),
+],
+...
 ```
 
 
