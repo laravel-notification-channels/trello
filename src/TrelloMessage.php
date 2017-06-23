@@ -18,6 +18,9 @@ class TrelloMessage
     /** @var string|null */
     protected $due;
 
+    /** @var array|null */
+    protected $comments;
+
     /**
      * @param string $name
      *
@@ -111,13 +114,55 @@ class TrelloMessage
      */
     public function due($due)
     {
-        if (! $due instanceof DateTime) {
+        if (!$due instanceof DateTime) {
             $due = new DateTime($due);
         }
 
         $this->due = $due->format(DateTime::ATOM);
 
         return $this;
+    }
+
+    /**
+     * Set the cards comments from array or string
+     *
+     * @param array|string $comments
+     *
+     * @return $this
+     */
+    public function comments($comments)
+    {
+        if (!is_array($comments)) {
+            $this->comments = [$comments];
+        } else {
+            $this->comments = $comments;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a comment to the card
+     *
+     * @param array $comments
+     *
+     * @return $this
+     */
+    public function comment($comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comments to add to the card
+     *
+     * @return array|null
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
     /**

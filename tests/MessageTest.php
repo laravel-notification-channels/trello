@@ -91,4 +91,43 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(5, Arr::get($this->message->toArray(), 'pos'));
     }
+
+    /** @test */
+    public function it_can_set_comments_from_array()
+    {
+        $this->assertEquals(null, $this->message->getComments());
+
+        $this->message->comments(['foo', 'bar', 'baz']);
+
+        $this->assertEquals(['foo', 'bar', 'baz'], $this->message->getComments());
+    }
+
+    /** @test */
+    public function it_can_add_comment()
+    {
+        $this->assertEquals(null, $this->message->getComments());
+
+        $this->message->comment('foo');
+
+        $this->assertEquals(['foo'], $this->message->getComments());
+
+        $this->message->comment('bar');
+
+        $this->assertEquals(['foo', 'bar'], $this->message->getComments());
+    }
+
+    /** @test */
+    public function it_can_set_comments_array_from_string()
+    {
+        $this->assertEquals(null, $this->message->getComments());
+
+        $this->message->comments('foo');
+
+        $this->assertEquals(['foo'], $this->message->getComments());
+
+        $this->message->comments('bar');
+
+        $this->assertEquals(['bar'], $this->message->getComments());
+    }
+
 }

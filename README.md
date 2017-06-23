@@ -69,7 +69,8 @@ class ProjectCreated extends Notification
             ->name("Trello Card Name")
             ->description("This is the Trello card description")
             ->top()
-            ->due('tomorrow');
+            ->due('tomorrow')
+            ->comments(['Don\'t forget to buy milk!', 'Brush your teeth twice a day']);
     }
 }
 ```
@@ -96,6 +97,8 @@ public function routeNotificationForTrello()
 - `bottom()`: Moves the Trello card to the bottom.
 - `position('')`: Accepts an integer for a specific Trello card position.
 - `due('')`: Accepts a string or DateTime object for the Trello card due date.
+- `comments([]|'')`: Accepts an array of comments or a comment string. Array of comment will be added to the Trello card individually.
+- `comment('')`: Accepts a comment string. Multiple comments can be added to the Trello card by calling this method multiple times.
 
 
 ## Changelog
