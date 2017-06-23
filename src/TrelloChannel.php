@@ -3,11 +3,11 @@
 namespace NotificationChannels\Trello;
 
 use GuzzleHttp\Client;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Arr;
+use Illuminate\Notifications\Notification;
 use NotificationChannels\Trello\Exceptions\CouldNotAddComment;
-use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
 use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
+use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
 
 class TrelloChannel
 {
@@ -38,7 +38,7 @@ class TrelloChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (!$routing = collect($notifiable->routeNotificationFor('Trello'))) {
+        if (! $routing = collect($notifiable->routeNotificationFor('Trello'))) {
             return;
         }
 
@@ -49,7 +49,7 @@ class TrelloChannel
         $trelloParameters = $notification->toTrello($notifiable)->toArray();
         $trelloCardComments = $notification->toTrello($notifiable)->getComments();
 
-        $response = $this->client->post(self::API_ENDPOINT . '?key=' . $this->key . '&token=' . $routing->get('token'), [
+        $response = $this->client->post(self::API_ENDPOINT.'?key='.$this->key.'&token='.$routing->get('token'), [
             'form_params' => Arr::set($trelloParameters, 'idList', $routing->get('idList')),
         ]);
 
@@ -72,13 +72,13 @@ class TrelloChannel
      */
     public function addComments($notifiable, array $trelloCardComments, $response)
     {
-        if (!$routing = collect($notifiable->routeNotificationFor('Trello'))) {
+        if (! $routing = collect($notifiable->routeNotificationFor('Trello'))) {
             return;
         }
 
         $cardId = json_decode($response->getBody()->getContents())->id;
         foreach ($trelloCardComments as $comment) {
-            $response = $this->client->post(self::API_ENDPOINT . $cardId . '/actions/comments?key=' . $this->key . '&token=' . $routing->get('token'), [
+            $response = $this->client->post(self::API_ENDPOINT.$cardId.'/actions/comments?key='.$this->key.'&token='.$routing->get('token'), [
                 'form_params' => ['text' => $comment],
             ]);
             if ($response->getStatusCode() !== 200) {
@@ -86,5 +86,4 @@ class TrelloChannel
             }
         }
     }
-
 }

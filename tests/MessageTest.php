@@ -129,5 +129,4 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(['bar'], $this->message->getComments());
     }
-
 }

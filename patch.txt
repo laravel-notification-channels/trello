@@ -1,0 +1,163 @@
+diff --git a/src/Exceptions/CouldNotAddComment.php b/src/Exceptions/CouldNotAddComment.php
+index b9aa6634c1d41dbd69f6388a650d37f08b2cd968..bd70ce68b0116f75a80364dae868c95842436117 100644
+--- a/src/Exceptions/CouldNotAddComment.php
++++ b/src/Exceptions/CouldNotAddComment.php
+@@ -6,6 +6,6 @@ class CouldNotAddComment extends \Exception
+ {
+     public static function serviceRespondedWithAnError($response)
+     {
+-        return new static('Error adding comment. Trello responded with an error: `' . $response->getBody()->getContents() . '`');
++        return new static('Error adding comment. Trello responded with an error: `'.$response->getBody()->getContents().'`');
+     }
+ }
+diff --git a/src/TrelloChannel.php b/src/TrelloChannel.php
+index cc4b1e95259d73d4b29bddbd985a014ae671f55d..c9591282d4a8be9ae43d231df38219a8cc96ce76 100644
+--- a/src/TrelloChannel.php
++++ b/src/TrelloChannel.php
+@@ -3,11 +3,11 @@
+ namespace NotificationChannels\Trello;
+ 
+ use GuzzleHttp\Client;
+-use Illuminate\Notifications\Notification;
+ use Illuminate\Support\Arr;
++use Illuminate\Notifications\Notification;
+ use NotificationChannels\Trello\Exceptions\CouldNotAddComment;
+-use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
+ use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
++use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
+ 
+ class TrelloChannel
+ {
+@@ -38,7 +38,7 @@ class TrelloChannel
+      */
+     public function send($notifiable, Notification $notification)
+     {
+-        if (!$routing = collect($notifiable->routeNotificationFor('Trello'))) {
++        if (! $routing = collect($notifiable->routeNotificationFor('Trello'))) {
+             return;
+         }
+ 
+@@ -49,7 +49,7 @@ class TrelloChannel
+         $trelloParameters = $notification->toTrello($notifiable)->toArray();
+         $trelloCardComments = $notification->toTrello($notifiable)->getComments();
+ 
+-        $response = $this->client->post(self::API_ENDPOINT . '?key=' . $this->key . '&token=' . $routing->get('token'), [
++        $response = $this->client->post(self::API_ENDPOINT.'?key='.$this->key.'&token='.$routing->get('token'), [
+             'form_params' => Arr::set($trelloParameters, 'idList', $routing->get('idList')),
+         ]);
+ 
+@@ -72,13 +72,13 @@ class TrelloChannel
+      */
+     public function addComments($notifiable, array $trelloCardComments, $response)
+     {
+-        if (!$routing = collect($notifiable->routeNotificationFor('Trello'))) {
++        if (! $routing = collect($notifiable->routeNotificationFor('Trello'))) {
+             return;
+         }
+ 
+         $cardId = json_decode($response->getBody()->getContents())->id;
+         foreach ($trelloCardComments as $comment) {
+-            $response = $this->client->post(self::API_ENDPOINT . $cardId . '/actions/comments?key=' . $this->key . '&token=' . $routing->get('token'), [
++            $response = $this->client->post(self::API_ENDPOINT.$cardId.'/actions/comments?key='.$this->key.'&token='.$routing->get('token'), [
+                 'form_params' => ['text' => $comment],
+             ]);
+             if ($response->getStatusCode() !== 200) {
+@@ -86,5 +86,4 @@ class TrelloChannel
+             }
+         }
+     }
+-
+ }
+diff --git a/src/TrelloMessage.php b/src/TrelloMessage.php
+index 96b06f1a13fd9fd2d82c3a9dfa888024edd8afea..61eee0e6ad8fdcbeecab0384c37e36388249b8d6 100644
+--- a/src/TrelloMessage.php
++++ b/src/TrelloMessage.php
+@@ -114,7 +114,7 @@ class TrelloMessage
+      */
+     public function due($due)
+     {
+-        if (!$due instanceof DateTime) {
++        if (! $due instanceof DateTime) {
+             $due = new DateTime($due);
+         }
+ 
+@@ -124,7 +124,7 @@ class TrelloMessage
+     }
+ 
+     /**
+-     * Set the cards comments from array or string
++     * Set the cards comments from array or string.
+      *
+      * @param array|string $comments
+      *
+@@ -132,7 +132,7 @@ class TrelloMessage
+      */
+     public function comments($comments)
+     {
+-        if (!is_array($comments)) {
++        if (! is_array($comments)) {
+             $this->comments = [$comments];
+         } else {
+             $this->comments = $comments;
+@@ -142,7 +142,7 @@ class TrelloMessage
+     }
+ 
+     /**
+-     * Add a comment to the card
++     * Add a comment to the card.
+      *
+      * @param array $comments
+      *
+@@ -156,7 +156,7 @@ class TrelloMessage
+     }
+ 
+     /**
+-     * Get comments to add to the card
++     * Get comments to add to the card.
+      *
+      * @return array|null
+      */
+diff --git a/tests/ChannelTest.php b/tests/ChannelTest.php
+index a06a042f150bc468f4ce1d38950b221699754f70..a8a33ae2fa1a84bcd2dc6b87c0cd2f359aea2d7d 100644
+--- a/tests/ChannelTest.php
++++ b/tests/ChannelTest.php
+@@ -2,16 +2,16 @@
+ 
+ namespace NotificationChannels\Trello\Test;
+ 
++use Mockery;
+ use GuzzleHttp\Client;
+ use GuzzleHttp\Psr7\Response;
++use Orchestra\Testbench\TestCase;
+ use Illuminate\Notifications\Notification;
+-use Mockery;
+-use NotificationChannels\Trello\Exceptions\CouldNotAddComment;
+-use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
+-use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
+ use NotificationChannels\Trello\TrelloChannel;
+ use NotificationChannels\Trello\TrelloMessage;
+-use Orchestra\Testbench\TestCase;
++use NotificationChannels\Trello\Exceptions\CouldNotAddComment;
++use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
++use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
+ 
+ class ChannelTest extends TestCase
+ {
+@@ -113,7 +113,6 @@ class ChannelTest extends TestCase
+         $channel = new TrelloChannel($client);
+         $channel->addComments(new TestNotifiable(), ['foo', 'bar'], $createCardResponse);
+     }
+-
+ }
+ 
+ class TestNotifiable
+diff --git a/tests/MessageTest.php b/tests/MessageTest.php
+index 61cc34ddce1db8b582d03cd67826c58fc00b5643..1135dae98e241cf92c05cd351d1bf6cb10d4910b 100644
+--- a/tests/MessageTest.php
++++ b/tests/MessageTest.php
+@@ -129,5 +129,4 @@ class MessageTest extends \PHPUnit_Framework_TestCase
+ 
+         $this->assertEquals(['bar'], $this->message->getComments());
+     }
+-
+ }

@@ -114,7 +114,7 @@ class TrelloMessage
      */
     public function due($due)
     {
-        if (!$due instanceof DateTime) {
+        if (! $due instanceof DateTime) {
             $due = new DateTime($due);
         }
 
@@ -124,7 +124,7 @@ class TrelloMessage
     }
 
     /**
-     * Set the cards comments from array or string
+     * Set the cards comments from array or string.
      *
      * @param array|string $comments
      *
@@ -132,7 +132,7 @@ class TrelloMessage
      */
     public function comments($comments)
     {
-        if (!is_array($comments)) {
+        if (! is_array($comments)) {
             $this->comments = [$comments];
         } else {
             $this->comments = $comments;
@@ -142,7 +142,7 @@ class TrelloMessage
     }
 
     /**
-     * Add a comment to the card
+     * Add a comment to the card.
      *
      * @param array $comments
      *
@@ -156,7 +156,7 @@ class TrelloMessage
     }
 
     /**
-     * Get comments to add to the card
+     * Get comments to add to the card.
      *
      * @return array|null
      */
