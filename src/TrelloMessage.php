@@ -17,6 +17,9 @@ class TrelloMessage
 
     /** @var string|null */
     protected $due;
+    
+    /** @var string|null */
+    protected $labels;
 
     /**
      * @param string $name
@@ -121,6 +124,20 @@ class TrelloMessage
     }
 
     /**
+     * Set the card labels.
+     *
+     * @param array $labels
+     *
+     * @return $this
+     */
+    public function labels($labels)
+    {
+        $this->labels = implode(',', $labels);
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -130,6 +147,7 @@ class TrelloMessage
             'desc' => $this->description,
             'pos' => $this->position,
             'due' => $this->due,
+            'labels' => $this->labels,
         ];
     }
 }
