@@ -96,6 +96,7 @@ public function routeNotificationForTrello()
 - `bottom()`: Moves the Trello card to the bottom.
 - `position('')`: Accepts an integer for a specific Trello card position.
 - `due('')`: Accepts a string or DateTime object for the Trello card due date.
+- `labels([])`: Accepts a array or labels for the Trello card label.
 
 
 ## Changelog
