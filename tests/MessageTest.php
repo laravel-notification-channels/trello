@@ -91,4 +91,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(5, Arr::get($this->message->toArray(), 'pos'));
     }
+
+    public function it_can_set_a_labels()
+    {
+        $this->message->labels(['green', 'red']);
+
+        $this->assertEquals('green,red', Arr::get($this->message->toArray(), 'labels'));
+    }
 }
