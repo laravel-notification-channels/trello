@@ -2,15 +2,15 @@
 
 namespace NotificationChannels\Trello\Test;
 
+use Mockery;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
+use Orchestra\Testbench\TestCase;
 use Illuminate\Notifications\Notification;
-use Mockery;
-use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
-use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
 use NotificationChannels\Trello\TrelloChannel;
 use NotificationChannels\Trello\TrelloMessage;
-use Orchestra\Testbench\TestCase;
+use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
+use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
 
 class ChannelTest extends TestCase
 {
@@ -80,7 +80,6 @@ class TestNotifiable
         ];
     }
 }
-
 
 class TestNotification extends Notification
 {
