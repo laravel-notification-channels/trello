@@ -4,9 +4,9 @@ namespace NotificationChannels\Trello;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
-use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
+use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
 
 class TrelloChannel
 {
