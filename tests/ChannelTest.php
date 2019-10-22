@@ -2,15 +2,15 @@
 
 namespace NotificationChannels\Trello\Test;
 
+use Mockery;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
+use Orchestra\Testbench\TestCase;
 use Illuminate\Notifications\Notification;
-use Mockery;
-use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
-use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
 use NotificationChannels\Trello\TrelloChannel;
 use NotificationChannels\Trello\TrelloMessage;
-use Orchestra\Testbench\TestCase;
+use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
+use NotificationChannels\Trello\Exceptions\CouldNotSendNotification;
 
 class ChannelTest extends TestCase
 {
@@ -41,7 +41,7 @@ class ChannelTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_it_is_not_configured()
     {
-        $this->setExpectedException(InvalidConfiguration::class);
+        $this->expectException(InvalidConfiguration::class);
 
         $client = new Client();
         $channel = new TrelloChannel($client);
@@ -51,7 +51,7 @@ class ChannelTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_it_could_not_send_the_notification()
     {
-        $this->setExpectedException(CouldNotSendNotification::class);
+        $this->expectException(CouldNotSendNotification::class);
 
         $this->app['config']->set('services.trello.key', 'TrelloKey');
 
@@ -80,7 +80,6 @@ class TestNotifiable
         ];
     }
 }
-
 
 class TestNotification extends Notification
 {

@@ -4,14 +4,15 @@ namespace NotificationChannels\Trello\Test;
 
 use DateTime;
 use Illuminate\Support\Arr;
+use PHPUnit\Framework\TestCase;
 use NotificationChannels\Trello\TrelloMessage;
 
-class MessageTest extends \PHPUnit_Framework_TestCase
+class MessageTest extends TestCase
 {
     /** @var \NotificationChannels\Trello\TrelloMessage */
     protected $message;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
