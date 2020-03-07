@@ -4,8 +4,8 @@ namespace NotificationChannels\Trello\Test;
 
 use DateTime;
 use Illuminate\Support\Arr;
-use PHPUnit\Framework\TestCase;
 use NotificationChannels\Trello\TrelloMessage;
+use PHPUnit\Framework\TestCase;
 
 class MessageTest extends TestCase
 {
