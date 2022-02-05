@@ -20,8 +20,7 @@ class TrelloMessage
     protected $due;
 
     /**
-     * @param string $name
-     *
+     * @param  string  $name
      * @return static
      */
     public static function create(string $name = ''): TrelloMessage
@@ -30,7 +29,7 @@ class TrelloMessage
     }
 
     /**
-     * @param string $name
+     * @param  string  $name
      */
     public function __construct(string $name = '')
     {
@@ -40,8 +39,7 @@ class TrelloMessage
     /**
      * Set the card name.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return $this
      */
     public function name(string $name): TrelloMessage
@@ -54,8 +52,7 @@ class TrelloMessage
     /**
      * Set the card description.
      *
-     * @param string $description
-     *
+     * @param  string  $description
      * @return $this
      */
     public function description(string $description): TrelloMessage
@@ -68,8 +65,7 @@ class TrelloMessage
     /**
      * Set the card position.
      *
-     * @param string|int $position
-     *
+     * @param  string|int  $position
      * @return $this
      */
     public function position(string $position): TrelloMessage
@@ -106,8 +102,7 @@ class TrelloMessage
     /**
      * Set the card position due date.
      *
-     * @param string|DateTime $due
-     *
+     * @param  string|DateTime  $due
      * @return $this
      * @throws \Exception
      */
