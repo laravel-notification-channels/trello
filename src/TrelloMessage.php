@@ -3,6 +3,7 @@
 namespace NotificationChannels\Trello;
 
 use DateTime;
+use DateTimeInterface;
 
 class TrelloMessage
 {
@@ -19,19 +20,18 @@ class TrelloMessage
     protected $due;
 
     /**
-     * @param string $name
-     *
+     * @param  string  $name
      * @return static
      */
-    public static function create($name = '')
+    public static function create(string $name = ''): TrelloMessage
     {
         return new static($name);
     }
 
     /**
-     * @param string $name
+     * @param  string  $name
      */
-    public function __construct($name = '')
+    public function __construct(string $name = '')
     {
         $this->name = $name;
     }
@@ -39,11 +39,10 @@ class TrelloMessage
     /**
      * Set the card name.
      *
-     * @param $name
-     *
+     * @param  string  $name
      * @return $this
      */
-    public function name($name)
+    public function name(string $name): TrelloMessage
     {
         $this->name = $name;
 
@@ -53,11 +52,10 @@ class TrelloMessage
     /**
      * Set the card description.
      *
-     * @param $description
-     *
+     * @param  string  $description
      * @return $this
      */
-    public function description($description)
+    public function description(string $description): TrelloMessage
     {
         $this->description = $description;
 
@@ -67,11 +65,10 @@ class TrelloMessage
     /**
      * Set the card position.
      *
-     * @param string|int $position
-     *
+     * @param  string|int  $position
      * @return $this
      */
-    public function position($position)
+    public function position(string $position): TrelloMessage
     {
         $this->position = $position;
 
@@ -83,7 +80,7 @@ class TrelloMessage
      *
      * @return $this
      */
-    public function top()
+    public function top(): TrelloMessage
     {
         $this->position = 'top';
 
@@ -95,7 +92,7 @@ class TrelloMessage
      *
      * @return $this
      */
-    public function bottom()
+    public function bottom(): TrelloMessage
     {
         $this->position = 'bottom';
 
@@ -105,17 +102,18 @@ class TrelloMessage
     /**
      * Set the card position due date.
      *
-     * @param string|DateTime $due
-     *
+     * @param  string|DateTime  $due
      * @return $this
+     *
+     * @throws \Exception
      */
-    public function due($due)
+    public function due($due): TrelloMessage
     {
         if (! $due instanceof DateTime) {
             $due = new DateTime($due);
         }
 
-        $this->due = $due->format(DateTime::ATOM);
+        $this->due = $due->format(DateTimeInterface::ATOM);
 
         return $this;
     }
@@ -123,7 +121,7 @@ class TrelloMessage
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'name' => $this->name,

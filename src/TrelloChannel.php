@@ -10,7 +10,8 @@ use NotificationChannels\Trello\Exceptions\InvalidConfiguration;
 
 class TrelloChannel
 {
-    const API_ENDPOINT = 'https://api.trello.com/1/cards/';
+    /** @var string */
+    public const API_ENDPOINT = 'https://api.trello.com/1/cards/';
 
     /** @var Client */
     protected $client;
@@ -24,13 +25,14 @@ class TrelloChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
+     * @param  mixed  $notifiable
+     * @param  \Illuminate\Notifications\Notification  $notification
      *
      * @throws \NotificationChannels\Trello\Exceptions\InvalidConfiguration
      * @throws \NotificationChannels\Trello\Exceptions\CouldNotSendNotification
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function send($notifiable, Notification $notification)
+    public function send($notifiable, Notification $notification): void
     {
         if (! $routing = collect($notifiable->routeNotificationFor('Trello'))) {
             return;

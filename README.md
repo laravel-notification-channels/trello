@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/trello/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/trello/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/trello.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/trello)
 
-This package makes it easy to create [Trello cards](https://developers.trello.com/) with Laravel 6.x, 7.x & 8.x.
+This package makes it easy to create [Trello cards](https://developers.trello.com/) with Laravel 6.x, 7.x, 8.x & 9.x.
 
 ## Contents
 
