@@ -104,6 +104,7 @@ class TrelloMessage
      *
      * @param  string|DateTime  $due
      * @return $this
+     *
      * @throws \Exception
      */
     public function due($due): TrelloMessage
