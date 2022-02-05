@@ -25,8 +25,8 @@ class TrelloChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
+     * @param  mixed  $notifiable
+     * @param  \Illuminate\Notifications\Notification  $notification
      *
      * @throws \NotificationChannels\Trello\Exceptions\InvalidConfiguration
      * @throws \NotificationChannels\Trello\Exceptions\CouldNotSendNotification
